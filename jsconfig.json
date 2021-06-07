@@ -6,7 +6,8 @@
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@auth/*": ["auth/*"],
-      "@validators/*":["validators/*"],
+      "@validators/*": ["validators/*"],
+      "@typing/*": ["typing/*"]
     }
   }
 }

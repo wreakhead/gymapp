@@ -1,26 +1,36 @@
 import NeonBanner from "@components/NeonBanner";
-import { signinSchema } from "@validators/signinSchema";
 import { useFormik } from "formik";
-import { loginUser } from "@auth/auth";
 import { Grid, TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import CustomizedSnackbars from "./Alert";
+import { signupSchema } from "@validators/signupSchema";
+import { signUp } from "@auth/auth";
 
-const SignInlayout = () => {
+const SignUplayout = () => {
   let router = useRouter();
   let [alertMessage, setAlert] = useState(null);
+  let [alertType, alertTypeSet] = useState("error");
   const formSubmitted = async (event) => {
-    const value = await loginUser(event);
+    const value = await signUp(event);
     setAlert(value);
+    if (value == "All done") {
+      alertTypeSet("success");
+    } else alertTypeSet("error");
+    if (alertType == "success") {
+      setTimeout(() => {
+        router.push("/signin");
+      }, 3000);
+    }
   };
   const formik = useFormik({
     initialValues: {
+      name: "",
       mobile: "",
       password: "",
     },
-    validationSchema: signinSchema,
+    validationSchema: signupSchema,
     onSubmit: (val) => {
       formSubmitted(val);
     },
@@ -36,11 +46,11 @@ const SignInlayout = () => {
         spacing={5}
       >
         <Grid item>
-          <NeonBanner text="SignIn" />
+          <NeonBanner text="SignUp" />
         </Grid>
         <Grid item>
           {alertMessage ? (
-            <CustomizedSnackbars type="error" message={alertMessage} />
+            <CustomizedSnackbars type={alertType} message={alertMessage} />
           ) : (
             <></>
           )}
@@ -55,6 +65,19 @@ const SignInlayout = () => {
               alignItems="center"
               spacing={1}
             >
+              <Grid item>
+                <TextField
+                  variant="filled"
+                  fullWidth
+                  id="name"
+                  name="name"
+                  label="Username"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
+                />
+              </Grid>
               <Grid item>
                 <TextField
                   variant="filled"
@@ -91,7 +114,7 @@ const SignInlayout = () => {
                   fullWidth
                   type="submit"
                 >
-                  Get in!
+                  Done!
                 </Button>
               </Grid>
             </Grid>
@@ -101,4 +124,4 @@ const SignInlayout = () => {
     </>
   );
 };
-export default SignInlayout;
+export default SignUplayout;
