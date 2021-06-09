@@ -1,11 +1,8 @@
-
-
+import HomeLayout from "@components/HomeLayout";
+import { Box } from "@material-ui/core";
 import Head from "next/head";
 
-
-
 const Home = () => {
-  
   return (
     <>
       <Head>
@@ -15,9 +12,9 @@ const Home = () => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <h1>Home</h1>
-      
-      
+      <Box component="div" p={5}>
+        <HomeLayout />
+      </Box>
     </>
   );
 };

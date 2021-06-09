@@ -7,10 +7,21 @@ import Button from "@material-ui/core/Button";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import CustomizedSnackbars from "./Alert";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import IconButton from "@material-ui/core/IconButton";
+import DialpadIcon from "@material-ui/icons/Dialpad";
 
 const SignInlayout = () => {
-  let router = useRouter();
-  let [alertMessage, setAlert] = useState(null);
+  const router = useRouter();
+  const [alertMessage, setAlert] = useState(null);
+  const [showPassword, setshowPassword] = useState(false);
+  const handleClickShowPassword = () => {
+    setshowPassword(!showPassword);
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const formSubmitted = async (event) => {
     const value = await loginUser(event);
     setAlert(value);
@@ -66,24 +77,44 @@ const SignInlayout = () => {
                   onChange={formik.handleChange}
                   error={formik.touched.mobile && Boolean(formik.errors.mobile)}
                   helperText={formik.touched.mobile && formik.errors.mobile}
+                  InputProps={{
+                    endAdornment: <div><DialpadIcon /></div>,
+                  }}
                 />
               </Grid>
               <Grid item>
-                <TextField
-                  variant="filled"
-                  fullWidth
-                  id="password"
-                  name="password"
-                  label="Password"
-                  type="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.password && Boolean(formik.errors.password)
-                  }
-                  helperText={formik.touched.password && formik.errors.password}
-                />
+                <Grid item>
+                  <TextField
+                    variant="filled"
+                    fullWidth
+                    id="password"
+                    name="password"
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.password && Boolean(formik.errors.password)
+                    }
+                    helperText={
+                      formik.touched.password && formik.errors.password
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      ),
+                    }}
+                  />
+                </Grid>
               </Grid>
+
               <Grid item>
                 <Button
                   color="primary"

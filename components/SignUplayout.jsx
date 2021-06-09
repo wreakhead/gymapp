@@ -1,6 +1,6 @@
 import NeonBanner from "@components/NeonBanner";
 import { useFormik } from "formik";
-import { Grid, TextField } from "@material-ui/core";
+import { CircularProgress, Grid, TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -16,13 +16,9 @@ const SignUplayout = () => {
     const value = await signUp(event);
     setAlert(value);
     if (value == "All done") {
-      alertTypeSet("success");
-    } else alertTypeSet("error");
-    if (alertType == "success") {
-      setTimeout(() => {
-        router.push("/signin");
-      }, 3000);
-    }
+      alertTypeSet((prev) => "success");
+      router.push("/signin");
+    } else alertTypeSet((prev) => "error");
   };
   const formik = useFormik({
     initialValues: {
@@ -114,7 +110,11 @@ const SignUplayout = () => {
                   fullWidth
                   type="submit"
                 >
-                  Done!
+                  {alertMessage ? (
+                    <CircularProgress color="secondary" />
+                  ) : (
+                    <>Done!</>
+                  )}
                 </Button>
               </Grid>
             </Grid>
