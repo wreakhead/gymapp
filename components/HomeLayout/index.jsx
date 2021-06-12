@@ -6,8 +6,9 @@ import Dashboard from "./Dasboard";
 import TotalTime from "./TotalTime";
 import Bargraph from "./Bargraph";
 import AddWorkout from "./AddWorkout";
-import Table from "./Table";
+import Table from "./SmallTable";
 import UserLogo from "./UserLogo";
+import { checkLoggedIn } from "@auth/auth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,33 +23,48 @@ const useStyles = makeStyles((theme) => ({
 
 const HomeLayout = () => {
   const classes = useStyles();
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={8}>
-          <div className={classes.paper}><Dashboard/></div>
+  if (checkLoggedIn) {
+    return (
+      <div className={classes.root}>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Paper variant="outlined" square className={classes.paper}>
+              <Dashboard />
+            </Paper>
+          </Grid>
+          {/* <Grid item xs={4}>
+            <Paper variant="outlined" square className={classes.paper}>
+              <UserLogo />
+            </Paper>
+          </Grid> */}
+          <Grid item xs={12} sm={4}>
+            <Paper variant="outlined" square className={classes.paper}>
+              stats
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Paper variant="outlined" square className={classes.paper}>
+              <TotalTime />
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper variant="outlined" square className={classes.paper}>
+              <Bargraph />
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper variant="outlined" square className={classes.paper}>
+              <AddWorkout />
+            </Paper>
+          </Grid>
+          <Grid item xs={12}>
+            <Paper variant="outlined" square className={classes.paper}>
+              <Table />
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}><UserLogo/></Paper>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Paper className={classes.paper}>stats</Paper>
-        </Grid>
-        <Grid item xs={12} sm={8}>
-          <Paper className={classes.paper}><TotalTime/></Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}><Bargraph/></Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}><AddWorkout/></Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}><Table/></Paper>
-        </Grid>
-        
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 };
 export default HomeLayout;

@@ -4,24 +4,28 @@ import { Box } from "@material-ui/core";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-const Home = () => {
-  const router = useRouter();
-  
 
+const dashboard = () => {
+  const router = useRouter();
+  const pushtoSignin =() =>{
+    router.push('/signin')
+  }
+  
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Dashboard</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
       <Box component="div" p={5}>
-        {checkLoggedIn()?<HomeLayout />:<></>}
+        {checkLoggedIn()? <HomeLayout /> : pushtoSignin }
+        
       </Box>
     </>
   );
 };
 
-export default Home;
+export default dashboard;

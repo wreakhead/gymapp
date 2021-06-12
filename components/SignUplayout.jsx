@@ -1,6 +1,6 @@
 import NeonBanner from "@components/NeonBanner";
 import { useFormik } from "formik";
-import { CircularProgress, Grid, TextField } from "@material-ui/core";
+import { CircularProgress, Grid, TextField, Box } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -34,25 +34,17 @@ const SignUplayout = () => {
 
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        justify="space-around"
-        alignItems="center"
-        spacing={5}
-      >
-        <Grid item>
+      <Grid container justify="center" alignItems="center" spacing={3}>
+        <Grid
+          item
+          style={{ display: "flex", justifyContent: "center" }}
+          xs={12}
+          sm={6}
+        >
           <NeonBanner text="SignUp" />
         </Grid>
-        <Grid item>
-          {alertMessage ? (
-            <CustomizedSnackbars type={alertType} message={alertMessage} />
-          ) : (
-            <></>
-          )}
-        </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <form onSubmit={formik.handleSubmit}>
             <Grid
               container
@@ -104,23 +96,44 @@ const SignUplayout = () => {
                 />
               </Grid>
               <Grid item>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  fullWidth
-                  type="submit"
-                >
-                  {alertMessage ? (
-                    <CircularProgress color="secondary" />
-                  ) : (
-                    <>Done!</>
-                  )}
-                </Button>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      fullWidth
+                      type="submit"
+                    >
+                      {alertMessage ? (
+                        <CircularProgress color="secondary" />
+                      ) : (
+                        <>Done!</>
+                      )}
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      fullWidth
+                      onClick={() => {
+                        router.push("/signin");
+                      }}
+                    >
+                      Sign in
+                    </Button>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </form>
         </Grid>
       </Grid>
+      {alertMessage ? (
+        <CustomizedSnackbars type={alertType} message={alertMessage} />
+      ) : (
+        <></>
+      )}
     </>
   );
 };

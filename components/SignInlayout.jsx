@@ -2,7 +2,7 @@ import NeonBanner from "@components/NeonBanner";
 import { signinSchema } from "@validators/signinSchema";
 import { useFormik } from "formik";
 import { loginUser } from "@auth/auth";
-import { Grid, TextField } from "@material-ui/core";
+import { Box, Grid, TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -16,6 +16,7 @@ const SignInlayout = () => {
   const router = useRouter();
   const [alertMessage, setAlert] = useState(null);
   const [showPassword, setshowPassword] = useState(false);
+  const [alertType, alertTypeSet] = useState("error");
   const handleClickShowPassword = () => {
     setshowPassword(!showPassword);
   };
@@ -24,7 +25,12 @@ const SignInlayout = () => {
   };
   const formSubmitted = async (event) => {
     const value = await loginUser(event);
+
     setAlert(value);
+    if (value == "welcome!") {
+      alertTypeSet((prev) => "success");
+      router.push("/");
+    } else alertTypeSet((prev) => "error");
   };
   const formik = useFormik({
     initialValues: {
@@ -39,25 +45,17 @@ const SignInlayout = () => {
 
   return (
     <>
-      <Grid
-        container
-        direction="column"
-        justify="space-around"
-        alignItems="center"
-        spacing={5}
-      >
-        <Grid item>
+      <Grid container justify="center" alignItems="center" spacing={3}>
+        <Grid
+          item
+          style={{ display: "flex", justifyContent: "center" }}
+          xs={12}
+          sm={6}
+        >
           <NeonBanner text="SignIn" />
         </Grid>
-        <Grid item>
-          {alertMessage ? (
-            <CustomizedSnackbars type="error" message={alertMessage} />
-          ) : (
-            <></>
-          )}
-        </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <form onSubmit={formik.handleSubmit}>
             <Grid
               container
@@ -78,7 +76,11 @@ const SignInlayout = () => {
                   error={formik.touched.mobile && Boolean(formik.errors.mobile)}
                   helperText={formik.touched.mobile && formik.errors.mobile}
                   InputProps={{
-                    endAdornment: <div><DialpadIcon /></div>,
+                    endAdornment: (
+                      <div>
+                        <DialpadIcon />
+                      </div>
+                    ),
                   }}
                 />
               </Grid>
@@ -116,19 +118,41 @@ const SignInlayout = () => {
               </Grid>
 
               <Grid item>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  fullWidth
-                  type="submit"
-                >
-                  Get in!
-                </Button>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      fullWidth
+                      type="submit"
+                    >
+                      Get in!
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      fullWidth
+                      onClick={() => {
+                        router.push("/signup");
+                      }}
+                    >
+                      Sign Up
+                    </Button>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </form>
         </Grid>
       </Grid>
+
+      {alertMessage ? (
+        <CustomizedSnackbars type={alertType} message={alertMessage} />
+      ) : (
+        <></>
+      )}
     </>
   );
 };
