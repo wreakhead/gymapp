@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    justifyContent:"center",
     flexWrap: "wrap",
   },
   margin: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   textField: {
-    width: "20ch",
+    width: "120px",
   },
 }));
 

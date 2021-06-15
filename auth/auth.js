@@ -1,7 +1,8 @@
 import { loginEndPoint, workoutEndPoint } from "@utils/routePaths";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Router from 'next/router'
+import Router from "next/router";
+import useSWR from "swr";
 
 export const getToken = () => {
   const token = JSON.parse(localStorage.getItem("gymlogin"))?.token;
@@ -45,27 +46,27 @@ export const checkLoggedIn = () => {
     }
   }
 };
-export const localStorageCheck = () =>{
+export const localStorageCheck = () => {
   if (typeof window !== "undefined") {
     if (localStorage.getItem("gymlogin")) return true;
     else return false;
   }
-}
+};
 
-export const getlocalStorage = () =>{
+export const getlocalStorage = () => {
   if (typeof window !== "undefined") {
-    if (localStorage.getItem("gymlogin")) return JSON.parse(localStorage.getItem("gymlogin")) ;
+    if (localStorage.getItem("gymlogin"))
+      return JSON.parse(localStorage.getItem("gymlogin"));
     else return null;
   }
-}
+};
 
-export const deleteLocalStorage = () =>{
-  
+export const deleteLocalStorage = () => {
   if (typeof window !== "undefined") {
-    localStorage.removeItem("gymlogin")
-    Router.reload(window.location.pathname);}
-    
-}
+    localStorage.removeItem("gymlogin");
+    Router.reload(window.location.pathname);
+  }
+};
 
 export const addWorkoutData = async (props) => {
   try {
@@ -80,5 +81,19 @@ export const addWorkoutData = async (props) => {
   } catch (error) {
     const statusError = error.response.status;
     return statusError;
+  }
+};
+
+export const getWorkoutData = async (path) => {
+  try {
+    const config = getToken();
+    const { data } = await axios.get(
+      `${workoutEndPoint}${path}`,
+      config
+    );
+    
+    return data;
+  } catch (error) {
+    return error.response.status;
   }
 };

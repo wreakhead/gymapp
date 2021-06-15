@@ -17,7 +17,7 @@ const Home = () => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <Box component="div" p={5}>
+      <Box component="div" p={1}>
         {checkLoggedIn()?<HomeLayout />:<></>}
       </Box>
     </>

@@ -8,44 +8,46 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { workoutEndPoint } from "@utils/routePaths";
-import { getToken } from "@auth/auth";
-
-
+import { getToken, getWorkoutData } from "@auth/auth";
+import useSWR from "swr";
+import axios from "axios";
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
+  table: {},
 });
-
 
 const SmallTable = () => {
   const classes = useStyles();
-  
+  const { data } = useSWR("getworkoutdata", getWorkoutData,{ refreshInterval: 1000 });
+  console.log(data)
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Workout</TableCell>
+            <TableCell align="right">sets</TableCell>
+            <TableCell align="right">reps</TableCell>
+            <TableCell align="right">weight</TableCell>
+            <TableCell align="right">AMQRP</TableCell>
+            <TableCell align="right">AMQRP wt</TableCell>
+            <TableCell align="right">remark</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {/* {rows.map((row) => (
-            <TableRow key={row.name}>
+           {data?.workout.map((workout) => (
+            <TableRow key={workout._id}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {workout.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{workout.sets}</TableCell>
+              <TableCell align="right">{workout.reps}</TableCell>
+              <TableCell align="right">{workout.weight}</TableCell>
+              <TableCell align="right">{workout.AMQRP}</TableCell>
+              <TableCell align="right">{workout.AMQRPwt}</TableCell>
+              <TableCell align="right">{workout.remark}</TableCell>
             </TableRow>
-          ))} */}
+          ))} 
         </TableBody>
       </Table>
     </TableContainer>
