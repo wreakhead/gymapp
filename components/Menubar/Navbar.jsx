@@ -10,22 +10,45 @@ const Navbar = () => {
         </ActiveLink>
       </h1>
       <div className="menuOptions">
-        <ActiveLink activeClassName="menuActive" className="menuOptions" href="/">
+        <ActiveLink
+          activeClassName="menuActive"
+          className="menuOptions"
+          href="/"
+        >
           <a>Dashboard</a>
         </ActiveLink>
+        {localStorageCheck() ? (
+          <ActiveLink
+            activeClassName="menuActive"
+            className="menuOptions"
+            href="/workoutPage"
+          >
+            <a>Workout</a>
+          </ActiveLink>
+        ) : (
+          <></>
+        )}
         {localStorageCheck() ? (
           <>
             <a onClick={() => deleteLocalStorage()}>Signout</a>
           </>
         ) : (
-          <ActiveLink activeClassName="menuActive" className="menuOptions" href="/signin">
+          <ActiveLink
+            activeClassName="menuActive"
+            className="menuOptions"
+            href="/signin"
+          >
             <a>Signin</a>
           </ActiveLink>
         )}
         {localStorageCheck() ? (
           <></>
         ) : (
-          <ActiveLink activeClassName="menuActive" className="menuOptions" href="/signup">
+          <ActiveLink
+            activeClassName="menuActive"
+            className="menuOptions"
+            href="/signup"
+          >
             <a>Signup</a>
           </ActiveLink>
         )}

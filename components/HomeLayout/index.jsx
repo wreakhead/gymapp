@@ -19,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  bargraph:{
+    padding: theme.spacing(2),
+    textAlign: "center",
+    backgroundColor:"#bdbdbd"
+    
+  }
 }));
 
 const HomeLayout = () => {
@@ -48,7 +54,7 @@ const HomeLayout = () => {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <Paper variant="outlined" square className={classes.paper}>
+            <Paper variant="outlined" square className={classes.bargraph}>
               <Bargraph />
             </Paper>
           </Grid>

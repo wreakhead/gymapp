@@ -11,11 +11,14 @@ import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { IconButton } from "@material-ui/core";
 import { addWorkoutData } from "@auth/auth";
 import { useRouter } from "next/router";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    justifyContent:"center",
+    justifyContent: "center",
     flexWrap: "wrap",
   },
   margin: {
@@ -25,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   textField: {
-    width: "120px",
+    width: "110px",
   },
 }));
 
@@ -43,6 +46,7 @@ export default function AddWorkout() {
   const formik = useFormik({
     initialValues: {
       name: "",
+      
       sets: 0,
       reps: 0,
       weight: 0,
@@ -71,6 +75,18 @@ export default function AddWorkout() {
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
           />
+          {/* <InputLabel id="select-type" className={clsx(classes.margin, classes.textField)}>Type</InputLabel>
+          <Select
+            className={clsx(classes.margin, classes.textField)}
+            labelId="select-type"
+            id="simple-select"
+            value={formik.values.type}
+            onChange={formik.handleChange}
+          >
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select> */}
           <TextField
             label="sets"
             id="sets"
