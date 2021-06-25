@@ -5,9 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Dashboard from "./Dasboard";
 import TotalTime from "./TotalTime";
 import Bargraph from "./Bargraph";
-import AddWorkout from "./AddWorkout";
-import Table from "./SmallTable";
-import UserLogo from "./UserLogo";
+import Stats from "./Stats";
 import { checkLoggedIn } from "@auth/auth";
 
 const useStyles = makeStyles((theme) => ({
@@ -19,12 +17,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
-  bargraph:{
+  bargraph: {
     padding: theme.spacing(2),
     textAlign: "center",
-    backgroundColor:"#bdbdbd"
-    
-  }
+    backgroundColor: "#bdbdbd",
+  },
 }));
 
 const HomeLayout = () => {
@@ -38,14 +35,9 @@ const HomeLayout = () => {
               <Dashboard />
             </Paper>
           </Grid>
-          {/* <Grid item xs={4}>
-            <Paper variant="outlined" square className={classes.paper}>
-              <UserLogo />
-            </Paper>
-          </Grid> */}
           <Grid item xs={12} sm={4}>
-            <Paper variant="outlined" square className={classes.paper}>
-              stats
+            <Paper variant="outlined" square className={classes.bargraph}>
+              <Stats />
             </Paper>
           </Grid>
           <Grid item xs={12} sm={8}>
@@ -56,16 +48,6 @@ const HomeLayout = () => {
           <Grid item xs={12}>
             <Paper variant="outlined" square className={classes.bargraph}>
               <Bargraph />
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper variant="outlined" square className={classes.paper}>
-              <AddWorkout />
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper variant="outlined" square className={classes.paper}>
-              <Table />
             </Paper>
           </Grid>
         </Grid>

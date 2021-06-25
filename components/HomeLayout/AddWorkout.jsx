@@ -1,19 +1,17 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { useFormik } from "formik";
+import { Field, useFormik } from "formik";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
+import { MenuItem } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { addWorkoutSchema } from "@validators/addWorkoutSchema";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { IconButton } from "@material-ui/core";
-import { addWorkoutData } from "@auth/auth";
+import { addWorkoutData, getWorkoutData } from "@auth/auth";
 import { useRouter } from "next/router";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+
+import useSWR from "swr";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +33,11 @@ const useStyles = makeStyles((theme) => ({
 export default function AddWorkout() {
   const classes = useStyles();
   const router = useRouter();
+  // const { data } = useSWR("workoutsuggestion", getWorkoutData, {
+  //   refreshInterval: 1000,
+  // });
+  // console.log(data);
+  const workoutType = ["Push", "Pull", "Leg"];
 
   const formSubmitted = async (event) => {
     const addData = await addWorkoutData(event);
@@ -46,7 +49,7 @@ export default function AddWorkout() {
   const formik = useFormik({
     initialValues: {
       name: "",
-      
+      type: "",
       sets: 0,
       reps: 0,
       weight: 0,
@@ -65,28 +68,42 @@ export default function AddWorkout() {
       <div>
         <form onSubmit={formik.handleSubmit}>
           <TextField
+            className={clsx(classes.margin, classes.textField)}
             label="workout"
             id="name"
             type="text"
-            autoComplete="off"
-            className={clsx(classes.margin, classes.textField)}
+            autoComplete="on"
             value={formik.values.name}
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
           />
-          {/* <InputLabel id="select-type" className={clsx(classes.margin, classes.textField)}>Type</InputLabel>
-          <Select
+          <TextField
             className={clsx(classes.margin, classes.textField)}
-            labelId="select-type"
-            id="simple-select"
+            label="type"
+            id="type"
+            name="type"
+            select
+            
             value={formik.values.type}
             onChange={formik.handleChange}
+            error={formik.touched.type && Boolean(formik.errors.type)}
+            helperText={formik.touched.type && formik.errors.type}
           >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select> */}
+            <MenuItem  key={""} value={""}>
+              No Selected
+            </MenuItem>
+            <MenuItem key="push" value="push">
+              Push
+            </MenuItem>
+            <MenuItem key="pull" value="pull">
+              Pull
+            </MenuItem>
+            <MenuItem key="leg" value="leg">
+              Leg
+            </MenuItem>
+          </TextField>
+
           <TextField
             label="sets"
             id="sets"

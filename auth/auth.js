@@ -84,14 +84,27 @@ export const addWorkoutData = async (props) => {
   }
 };
 
+export const delWorkoutData = async (props) => {
+  try {
+    const config = getToken();
+    const { data } = await axios.delete(
+      `${workoutEndPoint}deleteworkout/${props._id}`,
+
+      config
+    );
+
+    return "deleted";
+  } catch (error) {
+    const statusError = error.response.status;
+    return statusError;
+  }
+};
+
 export const getWorkoutData = async (path) => {
   try {
     const config = getToken();
-    const { data } = await axios.get(
-      `${workoutEndPoint}${path}`,
-      config
-    );
-    
+    const { data } = await axios.get(`${workoutEndPoint}${path}`, config);
+
     return data;
   } catch (error) {
     return error.response.status;
