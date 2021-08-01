@@ -27,6 +27,8 @@ const SmallTable = () => {
 
   }
 
+  
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">

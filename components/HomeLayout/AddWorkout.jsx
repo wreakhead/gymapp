@@ -90,9 +90,7 @@ export default function AddWorkout() {
             error={formik.touched.type && Boolean(formik.errors.type)}
             helperText={formik.touched.type && formik.errors.type}
           >
-            <MenuItem  key={""} value={""}>
-              No Selected
-            </MenuItem>
+            
             <MenuItem key="push" value="push">
               Push
             </MenuItem>
