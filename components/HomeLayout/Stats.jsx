@@ -7,7 +7,7 @@ const Stats = () => {
   const { data } = useSWR("getworkoutdata", getWorkoutData, {
     refreshInterval: 100,
   });
-  console.log(data);
+  
   let push = 0;
   let pull = 0;
   let leg = 0;

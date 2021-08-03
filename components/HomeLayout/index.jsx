@@ -33,9 +33,9 @@ const HomeLayout = () => {
       <div className={classes.root}>
         <Grid container spacing={1}>
           <Grid item xs={12}>
-            <Paper variant="outlined"  className={classes.paper}>
+            
               <Dashboard />
-            </Paper>
+            
           </Grid>
           <Grid item xs={12} sm={4}>
             <Paper variant="outlined"  className={classes.bargraph}>
@@ -43,21 +43,21 @@ const HomeLayout = () => {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={8}>
-            <Paper variant="outlined"  className={classes.paper}>
-              <TotalTime />
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
             <Paper variant="outlined"  className={classes.bargraph}>
               <Pushgraph />
             </Paper>
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={6}>
+            <Paper variant="outlined"  className={classes.bargraph}>
+              
+            </Paper>
+          </Grid> */}
+          <Grid item xs={6} sm={12}>
             <Paper variant="outlined"  className={classes.bargraph}>
               <Pullgraph />
             </Paper>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6} sm={12}>
             <Paper variant="outlined"  className={classes.bargraph}>
               <Leggraph />
             </Paper>

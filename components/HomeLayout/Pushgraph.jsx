@@ -7,7 +7,7 @@ const Pushgraph = () => {
   const { data } = useSWR("getgraphdata", getWorkoutData, {
     refreshInterval: 1000,
   });
-  console.log(data);
+  
   let pushWt = []
   let pushdate = []
   
@@ -15,7 +15,7 @@ const Pushgraph = () => {
     pushWt.push(el.weight)
     pushdate.push(el.date)
   })
-  console.log(pushdate)
+  
 
   return (
     <div>

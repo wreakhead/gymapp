@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import useSWR from "swr";
+import SmallTable from "@components/HomeLayout/SmallTable";
 
 export const getToken = () => {
   const token = JSON.parse(localStorage.getItem("gymlogin"))?.token;
@@ -28,6 +29,7 @@ export const loginUser = async (props) => {
 export const signUp = async (props) => {
   try {
     const { data } = await axios.post(`${loginEndPoint}signup`, props);
+    
     return "All done";
   } catch (error) {
     let statusError = error.response.status;
@@ -110,3 +112,5 @@ export const getWorkoutData = async (path) => {
     return error.response.status;
   }
 };
+
+

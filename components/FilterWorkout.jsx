@@ -7,8 +7,9 @@ import TextField from "@material-ui/core/TextField";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { IconButton } from "@material-ui/core";
 import useSWR from "swr";
-import { getWorkoutData } from "@auth/auth";
+import { getFilter, getWorkoutData } from "@auth/auth";
 import { Button } from "@material-ui/core";
+import SmallTable from "./HomeLayout/SmallTable";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,9 +36,12 @@ const FilterWorkout = () => {
   const { data } = useSWR("workoutsuggestion", getWorkoutData, {
     refreshInterval: 1000,
   });
-  console.log(new Date().getMonth());
 
-  const formSubmitted = async (event) => {};
+  
+
+  const formSubmitted = async (event) => {
+    return(<SmallTable data={event}/>)
+  };
   const formik = useFormik({
     initialValues: {
       year: "",

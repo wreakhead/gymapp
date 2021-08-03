@@ -44,9 +44,9 @@ const workoutPage = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Paper variant="outlined"  className={classes.paper}>
-              {/* <SmallTable /> */}
-            </Paper>
+            
+              <SmallTable /> 
+            
           </Grid>
         </Grid>
       ) : (

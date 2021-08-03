@@ -12,7 +12,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import FitnessCenterRoundedIcon from "@material-ui/icons/FitnessCenterRounded";
 import { useRouter } from "next/router";
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-
+import EmojiFoodBeverageRoundedIcon from "@material-ui/icons/EmojiFoodBeverageRounded";
 
 export default function MobileNav() {
   const router = useRouter()
@@ -31,7 +31,6 @@ export default function MobileNav() {
   return (
     <Paper className="fixedNav">
       <BottomNavigation
-        
         value={value}
         onChange={(event, newValue) => {
           setValue(newValue);
@@ -52,7 +51,8 @@ export default function MobileNav() {
               disableTouchListener
               title={
                 <>
-                  <Button color="secondary"
+                  <Button
+                    color="secondary"
                     onClick={() => {
                       deleteLocalStorage();
                     }}
@@ -70,9 +70,22 @@ export default function MobileNav() {
             </Tooltip>
           </div>
         </ClickAwayListener>
-        <BottomNavigationAction onClick={()=>router.push("/")} label="" icon={<HomeRoundedIcon />} />
-     
-        <BottomNavigationAction onClick={()=>router.push("/workoutPage")} label="" icon={<FitnessCenterRoundedIcon />} />
+        <BottomNavigationAction
+          onClick={() => router.push("/")}
+          label=""
+          icon={<HomeRoundedIcon />}
+        />
+
+        <BottomNavigationAction
+          onClick={() => router.push("/workoutPage")}
+          label=""
+          icon={<FitnessCenterRoundedIcon />}
+        />
+        <BottomNavigationAction
+          onClick={() => router.push("/diet")}
+          label=""
+          icon={<EmojiFoodBeverageRoundedIcon />}
+        />
       </BottomNavigation>
     </Paper>
   );
