@@ -1,17 +1,16 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import { Field, useFormik } from "formik";
+import {  useFormik } from "formik";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { MenuItem } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { addWorkoutSchema } from "@validators/addWorkoutSchema";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { IconButton } from "@material-ui/core";
-import { addWorkoutData, getWorkoutData } from "@auth/auth";
+import { addWorkoutData } from "@auth/auth";
 import { useRouter } from "next/router";
 
-import useSWR from "swr";
 
 const useStyles = makeStyles((theme) => ({
   root: {

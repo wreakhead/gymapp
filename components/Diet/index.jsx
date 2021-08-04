@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { checkLoggedIn } from "@auth/auth";
+import AddFood from "./addFood";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,24 +22,26 @@ const useStyles = makeStyles((theme) => ({
 
 const DietLayout = () => {
   const classes = useStyles();
-  if (checkLoggedIn) {
+  if (checkLoggedIn()) {
     return (
       <div className={classes.root}>
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <div className="dietDiv">1</div>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <div className="dietDiv">2</div>
+          <Grid item xs={6} sm={6}>
+            <div className="dietDiv">
+              <AddFood />
+            </div>
           </Grid>
-          <Grid item xs={12} sm={8}>
+          {/* <Grid item xs={6} sm={3}>
             <div className="dietDiv">3</div>
-          </Grid>
+          </Grid> */}
 
-          <Grid item xs={6} sm={12}>
+          <Grid item xs={6} sm={3}>
             <div className="dietDiv">4</div>
           </Grid>
-          <Grid item xs={6} sm={12}>
+          <Grid item xs={6} sm={3}>
             <div className="dietDiv">5</div>
           </Grid>
         </Grid>

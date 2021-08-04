@@ -10,7 +10,9 @@ export default function sigin() {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <SignUplayout />
+      <div className="siguplayout">
+        <SignUplayout />
+      </div>
     </>
   );
 }

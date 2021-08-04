@@ -1,7 +1,8 @@
-html,
+
 body {
   padding: 5px;
   margin-bottom: 50px;
+  background-image: url(../utils/images/Untitled.png);
 }
 
 a {
@@ -84,7 +85,7 @@ nav .menuOptions {
   left: 50%;
   top: 95%;
   transform: translate(-50%, -50%);
-  width: 70%;
+  width: 340px;
   height: 60px;
   border-radius: 5px;
   border: 2px solid #4db6ac;
@@ -120,10 +121,25 @@ nav .menuOptions {
 
 /* diet */
 
-.dietDiv{
+.dietDiv{ 
   border: 1px solid rgb(184, 183, 183);
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
   /* box-shadow: 0 0 1rem 0 rgba(221, 218, 218, 0.2); */
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+.foodcard{
+  padding:15px;
+}
+
+/* signin */
+.siginlayout{
+  margin-top: 10%;
+}
+
+/* signup */
+.siguplayout{
+  margin-top: 10%;
 }

@@ -1,3 +1,4 @@
+import { checkLoggedIn } from "@auth/auth";
 import DietLayout from "@components/Diet";
 import { Box } from "@material-ui/core";
 import Head from "next/head";
@@ -13,7 +14,7 @@ export default function diet() {
           />
         </Head>
         <Box component="div" p={1}>
-          <DietLayout />
+          {checkLoggedIn()?<DietLayout />:<></>}
         </Box>
       </div>
     </>
