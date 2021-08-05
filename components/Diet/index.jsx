@@ -3,10 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { checkLoggedIn } from "@auth/auth";
 import AddFood from "./addFood";
+import DietDash from "./DietDash";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginBottom:"120px"
   },
   paper: {
     padding: theme.spacing(2),
@@ -27,13 +29,11 @@ const DietLayout = () => {
       <div className={classes.root}>
         <Grid container spacing={1}>
           <Grid item xs={12}>
-            <div className="dietDiv">1</div>
-          </Grid>
-          <Grid item xs={6} sm={6}>
             <div className="dietDiv">
-              <AddFood />
+              <DietDash />
             </div>
           </Grid>
+
           {/* <Grid item xs={6} sm={3}>
             <div className="dietDiv">3</div>
           </Grid> */}
@@ -43,6 +43,11 @@ const DietLayout = () => {
           </Grid>
           <Grid item xs={6} sm={3}>
             <div className="dietDiv">5</div>
+          </Grid>
+          <Grid item xs={12}>
+            <div className="dietDiv">
+              <AddFood />
+            </div>
           </Grid>
         </Grid>
       </div>

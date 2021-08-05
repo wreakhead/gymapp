@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
+    
   },
   margin: {
     margin: theme.spacing(1),
@@ -46,7 +47,7 @@ export default function AddFood() {
 
   return (
     <div className="foodcard">
-      <h1>Add Food</h1>
+      <h2>Add Food</h2>
       <div className={classes.root}>
         <form onSubmit={formik.handleSubmit}>
           <TextField
