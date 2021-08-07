@@ -6,6 +6,7 @@ import AddFood from "./addFood";
 import DietDash from "./DietDash";
 import Macros from "./Macros";
 import FoodBank from "./FoodBank";
+import AddMeal from "./AddMeal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,21 +45,16 @@ const DietLayout = () => {
             <div className="dietDiv">suggestion</div>
           </Grid>
           <Grid item xs={12}>
-            <div className="dietDiv">
-              <AddFood />
-            </div>
+            <AddMeal />
           </Grid>
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={12}>
             <FoodBank type="breakfast" />
-          </Grid>
-          <Grid item xs={6} sm={3}>
             <FoodBank type="lunch" />
-          </Grid>
-          <Grid item xs={6} sm={3}>
             <FoodBank type="snack" />
-          </Grid>
-          <Grid item xs={6} sm={3}>
             <FoodBank type="dinner" />
+          </Grid>
+          <Grid item xs={12}>
+            <AddFood />
           </Grid>
         </Grid>
       </div>

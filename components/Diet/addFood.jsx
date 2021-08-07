@@ -7,13 +7,20 @@ import { MenuItem } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { IconButton } from "@material-ui/core";
-import { addWorkoutData, getWorkoutData } from "@auth/auth";
+import {
+  addWorkoutData,
+  getFoodData,
+  getWorkoutData,
+  updateFoodData,
+} from "@auth/auth";
 import { useRouter } from "next/router";
 import { addFoodSchema } from "@validators/addFoodSchema";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import useSWR from "swr";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,15 +39,25 @@ const useStyles = makeStyles((theme) => ({
 export default function AddFood() {
   const classes = useStyles();
   const router = useRouter();
-  const formSubmitted = async (event) => {};
+
+  const { data } = useSWR("getfood", getFoodData, { refreshInterval: 1000 });
+  // console.log(data?.names);
+
+  const formSubmitted = async (event) => {
+    
+    const update = await updateFoodData(event);
+    console.log(update);
+  };
 
   const formik = useFormik({
     initialValues: {
-      type: "",
+      category: "",
       name: "",
       calories: 0,
       carbs: 0,
       fat: 0,
+      fiber: 0,
+      protein: 0,
     },
     validationSchema: addFoodSchema,
     onSubmit: (val) => {
@@ -49,7 +66,7 @@ export default function AddFood() {
   });
 
   return (
-    <div className="foodcard">
+    <div className="">
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -63,31 +80,33 @@ export default function AddFood() {
             <form onSubmit={formik.handleSubmit}>
               <TextField
                 className={clsx(classes.margin, classes.textField)}
-                label="type"
-                id="type"
-                name="type"
+                label="category"
+                id="category"
+                name="category"
                 select
-                value={formik.values.type}
+                value={formik.values.category}
                 onChange={formik.handleChange}
-                error={formik.touched.type && Boolean(formik.errors.type)}
-                helperText={formik.touched.type && formik.errors.type}
+                error={
+                  formik.touched.category && Boolean(formik.errors.category)
+                }
+                helperText={formik.touched.category && formik.errors.category}
               >
-                <MenuItem key="breakfast" value="breakfast">
-                  breakfast
+                <MenuItem key="fruit" value="fruit">
+                  fruit
                 </MenuItem>
-                <MenuItem key="lunch" value="lunch">
-                  lunch
+                <MenuItem key=" vegetable" value=" vegetable">
+                  vegetable
+                </MenuItem>
+                <MenuItem key="meat" value="meat">
+                  meat
                 </MenuItem>
                 <MenuItem key="snack" value="snack">
                   snack
                 </MenuItem>
-                <MenuItem key="dinner" value="dinner">
-                  dinner
-                </MenuItem>
               </TextField>
               <TextField
                 className={clsx(classes.margin, classes.textField)}
-                label="Food"
+                label="name"
                 id="name"
                 type="text"
                 autoComplete="off"
@@ -100,7 +119,7 @@ export default function AddFood() {
               <TextField
                 label="calories"
                 id="calories"
-                type="calories"
+                type="number"
                 className={clsx(classes.margin, classes.textField)}
                 value={formik.values.calories}
                 onChange={formik.handleChange}
@@ -110,14 +129,14 @@ export default function AddFood() {
                 helperText={formik.touched.calories && formik.errors.calories}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">cal</InputAdornment>
+                    <InputAdornment position="end">/100 gm</InputAdornment>
                   ),
                 }}
               />
               <TextField
                 label="carbs"
                 id="carbs"
-                type="carbs"
+                type="number"
                 className={clsx(classes.margin, classes.textField)}
                 value={formik.values.carbs}
                 onChange={formik.handleChange}
@@ -125,14 +144,14 @@ export default function AddFood() {
                 helperText={formik.touched.carbs && formik.errors.carbs}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">cal</InputAdornment>
+                    <InputAdornment position="end">/100 gm</InputAdornment>
                   ),
                 }}
               />
               <TextField
                 label="fat"
                 id="fat"
-                type="fat"
+                type="number"
                 className={clsx(classes.margin, classes.textField)}
                 value={formik.values.fat}
                 onChange={formik.handleChange}
@@ -140,7 +159,37 @@ export default function AddFood() {
                 helperText={formik.touched.fat && formik.errors.fat}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">cal</InputAdornment>
+                    <InputAdornment position="end">/100 gm</InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                label="fiber"
+                id="fiber"
+                type="number"
+                className={clsx(classes.margin, classes.textField)}
+                value={formik.values.fiber}
+                onChange={formik.handleChange}
+                error={formik.touched.fiber && Boolean(formik.errors.fiber)}
+                helperText={formik.touched.fiber && formik.errors.fiber}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">/100 gm</InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                label="protein"
+                id="protein"
+                type="number"
+                className={clsx(classes.margin, classes.textField)}
+                value={formik.values.protein}
+                onChange={formik.handleChange}
+                error={formik.touched.protein && Boolean(formik.errors.protein)}
+                helperText={formik.touched.protein && formik.errors.protein}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">/100 gm</InputAdornment>
                   ),
                 }}
               />

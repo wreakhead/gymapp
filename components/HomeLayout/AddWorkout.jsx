@@ -71,7 +71,7 @@ export default function AddWorkout() {
             label="workout"
             id="name"
             type="text"
-            autoComplete="on"
+            autoComplete="off"
             value={formik.values.name}
             onChange={formik.handleChange}
             error={formik.touched.name && Boolean(formik.errors.name)}

@@ -1,9 +1,13 @@
-import { loginEndPoint, workoutEndPoint } from "@utils/routePaths";
+import {
+  loginEndPoint,
+  workoutEndPoint,
+  foodapi,
+  dietEndPoint,
+} from "@utils/routePaths";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Router from "next/router";
-import useSWR from "swr";
-import SmallTable from "@components/HomeLayout/SmallTable";
+
 
 export const getToken = () => {
   const token = JSON.parse(localStorage.getItem("gymlogin"))?.token;
@@ -110,6 +114,36 @@ export const getWorkoutData = async (path) => {
     return data;
   } catch (error) {
     return error.response.status;
+  }
+};
+export const getFoodData = async (path) => {
+  try {
+    const { data } = await axios.get(`${foodapi}${path}`);
+    return data;
+  } catch (error) {
+    return error.response.status;
+  }
+};
+
+export const updateFoodData = async (props) => {
+  try {
+    const { data } = await axios.post(`${foodapi}updatefood`, props);
+
+    return "added";
+  } catch (error) {
+    const statusError = error.response.status;
+    return statusError;
+  }
+};
+export const addDietData = async (props) => {
+  try {
+    const config = getToken();
+    const { data } = await axios.post(`${dietEndPoint}add${props.type}`, props, config);
+
+    return "added";
+  } catch (error) {
+    const statusError = error.response.status;
+    return statusError;
   }
 };
 

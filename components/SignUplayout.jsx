@@ -12,6 +12,7 @@ const SignUplayout = () => {
   let router = useRouter();
   let [alertMessage, setAlert] = useState(null);
   let [alertType, alertTypeSet] = useState("error");
+  
   const formSubmitted = async (event) => {
     const value = await signUp(event);
     setAlert(value);
