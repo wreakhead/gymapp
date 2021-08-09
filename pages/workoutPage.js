@@ -35,11 +35,11 @@ const workoutPage = () => {
         <Box component="div" p={1} className="dashLayout">
           {checkLoggedIn() ? (
             <Grid container className={classes.root} spacing={1}>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <Paper variant="outlined" className={classes.paper}>
                   <FilterWorkout />
                 </Paper>
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <Paper variant="outlined" className={classes.paper}>
                   <AddWorkout />

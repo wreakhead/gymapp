@@ -25,7 +25,7 @@ export default function FoodBank(props) {
   const { data } = useSWR(`${props.type}`, getFoodLog, {
     refreshInterval: 1000,
   });
-  console.log(data);
+  
 
   const deleteData = async (event) => {
     console.log(event);

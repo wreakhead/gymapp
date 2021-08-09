@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DietDash() {
   const classes = useStyles();
   const { data } = useSWR("intakeMacros", getIntake, { refreshInterval: 1000 });
-  console.log(data);
+  
 
   const checkData = () => {
     if (data) return true;
