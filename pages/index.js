@@ -18,7 +18,7 @@ const Home = () => {
         />
       </Head>
       <Container maxWidth="lg">
-        <Box component="div" p={1}>
+        <Box component="div" p={1} className="dashLayout">
           {checkLoggedIn() ? <HomeLayout /> : <></>}
         </Box>
       </Container>

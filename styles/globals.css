@@ -118,6 +118,10 @@ nav .menuOptions {
 .entryBackground {
   background-image: url(../utils/images/1407238-full.jpg);
 }
+/* dashLayout */
+.dashLayout{
+  margin-bottom: 70px;
+}
 
 /* diet */
 

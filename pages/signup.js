@@ -1,5 +1,6 @@
 import SignUplayout from "@components/SignUplayout";
 import Head from "next/head";
+import { Box, Container } from "@material-ui/core";
 export default function sigin() {
   return (
     <>
@@ -10,9 +11,13 @@ export default function sigin() {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <div className="siguplayout">
-        <SignUplayout />
-      </div>
+      <Container maxWidth="lg">
+        <Box p={1}>
+          <div className="siguplayout">
+            <SignUplayout />
+          </div>
+        </Box>
+      </Container>
     </>
   );
 }

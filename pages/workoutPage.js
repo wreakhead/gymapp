@@ -32,7 +32,7 @@ const workoutPage = () => {
         />
       </Head>
       <Container maxWidth="lg">
-        <Box component="div" p={1}>
+        <Box component="div" p={1} className="dashLayout">
           {checkLoggedIn() ? (
             <Grid container className={classes.root} spacing={1}>
               <Grid item xs={12}>

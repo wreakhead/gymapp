@@ -12,8 +12,8 @@ export default function sigin() {
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
         </Head>
-        <Container>
-          <Box>
+        <Container maxWidth="lg">
+          <Box p={1}>
             <div className="siginlayout">
               <SignInlayout />
             </div>
