@@ -1,4 +1,5 @@
 import SignInlayout from "@components/SignInlayout";
+import { Box, Container } from "@material-ui/core";
 import Head from "next/head";
 export default function sigin() {
   return (
@@ -11,9 +12,13 @@ export default function sigin() {
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
         </Head>
-        <div className="siginlayout">
-          <SignInlayout />
-        </div>
+        <Container>
+          <Box>
+            <div className="siginlayout">
+              <SignInlayout />
+            </div>
+          </Box>
+        </Container>
       </div>
     </>
   );

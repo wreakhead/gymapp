@@ -1,6 +1,6 @@
 import { checkLoggedIn } from "@auth/auth";
 import HomeLayout from "@components/HomeLayout";
-import { Box } from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -17,9 +17,11 @@ const Home = () => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <Box component="div" p={1}>
-        {checkLoggedIn()?<HomeLayout />:<></>}
-      </Box>
+      <Container maxWidth="lg">
+        <Box component="div" p={1}>
+          {checkLoggedIn() ? <HomeLayout /> : <></>}
+        </Box>
+      </Container>
     </>
   );
 };

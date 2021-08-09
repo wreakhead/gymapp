@@ -8,7 +8,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Router from "next/router";
 
-
 export const getToken = () => {
   const token = JSON.parse(localStorage.getItem("gymlogin"))?.token;
   const config = {
@@ -33,7 +32,7 @@ export const loginUser = async (props) => {
 export const signUp = async (props) => {
   try {
     const { data } = await axios.post(`${loginEndPoint}signup`, props);
-    
+
     return "All done";
   } catch (error) {
     let statusError = error.response.status;
@@ -138,7 +137,11 @@ export const updateFoodData = async (props) => {
 export const addDietData = async (props) => {
   try {
     const config = getToken();
-    const { data } = await axios.post(`${dietEndPoint}add${props.type}`, props, config);
+    const { data } = await axios.post(
+      `${dietEndPoint}add${props.type}`,
+      props,
+      config
+    );
 
     return "added";
   } catch (error) {
@@ -147,4 +150,39 @@ export const addDietData = async (props) => {
   }
 };
 
+export const getFoodLog = async (path) => {
+  try {
+    const config = getToken();
+    const { data } = await axios.get(`${dietEndPoint}get${path}log`, config);
 
+    return data;
+  } catch (error) {
+    return error.response.status;
+  }
+};
+export const getIntake = async (path) => {
+  try {
+    const config = getToken();
+    const { data } = await axios.get(`${dietEndPoint}${path}`, config);
+
+    return data;
+  } catch (error) {
+    return error.response.status;
+  }
+};
+
+export const delDietData = async (props) => {
+  try {
+    const config = getToken();
+    const { data } = await axios.delete(
+      `${dietEndPoint}delete${props.type}/${props._id}`,
+
+      config
+    );
+
+    return "deleted";
+  } catch (error) {
+    const statusError = error.response.status;
+    return statusError;
+  }
+};

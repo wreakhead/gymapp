@@ -1,6 +1,6 @@
 import { checkLoggedIn } from "@auth/auth";
 import DietLayout from "@components/Diet";
-import { Box } from "@material-ui/core";
+import { Box, Container } from "@material-ui/core";
 import Head from "next/head";
 export default function diet() {
   return (
@@ -13,9 +13,11 @@ export default function diet() {
             content="minimum-scale=1, initial-scale=1, width=device-width"
           />
         </Head>
-        <Box component="div" p={1}>
-          {checkLoggedIn()?<DietLayout />:<></>}
-        </Box>
+        <Container maxWidth="lg">
+          <Box component="div" p={1}>
+            {checkLoggedIn() ? <DietLayout /> : <></>}
+          </Box>
+        </Container>
       </div>
     </>
   );

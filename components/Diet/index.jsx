@@ -50,7 +50,7 @@ const DietLayout = () => {
           <Grid item xs={12}>
             <FoodBank type="breakfast" />
             <FoodBank type="lunch" />
-            <FoodBank type="snack" />
+            <FoodBank type="snacks" />
             <FoodBank type="dinner" />
           </Grid>
           <Grid item xs={12}>
