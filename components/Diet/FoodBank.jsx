@@ -25,7 +25,6 @@ export default function FoodBank(props) {
   const { data } = useSWR(`${props.type}`, getFoodLog, {
     refreshInterval: 1000,
   });
-  
 
   const deleteData = async (event) => {
     console.log(event);
@@ -39,7 +38,7 @@ export default function FoodBank(props) {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <h2>{props.type}</h2>
+        <h2>{props.type.charAt(0).toUpperCase() + props.type.slice(1)}</h2>
       </AccordionSummary>
       <AccordionDetails>
         <TableContainer component={Paper}>

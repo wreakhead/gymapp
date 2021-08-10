@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { IconButton } from "@material-ui/core";
 import { addDietData, getFoodData } from "@auth/auth";
-import { useRouter } from "next/router";
+
 import { addMealSchema } from "@validators/addFoodSchema";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -33,13 +33,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddMeal() {
   const classes = useStyles();
-  const router = useRouter();
 
   const { data } = useSWR("getfood", getFoodData, { refreshInterval: 1000 });
+
   const formSubmitted = async (event) => {
-    console.log(event);
     const addData = await addDietData(event);
-    console.log(addData);
   };
 
   const formik = useFormik({
@@ -104,10 +102,10 @@ export default function AddMeal() {
                 helperText={formik.touched.name && formik.errors.name}
               >
                 <MenuItem key="" value=""></MenuItem>
-                {data?.names.map((name) => {
+                {data?.allData.map((ele) => {
                   return (
-                    <MenuItem key={name} value={name}>
-                      {name}
+                    <MenuItem key={ele._id} value={ele.name}>
+                      {ele.name}
                     </MenuItem>
                   );
                 })}
@@ -124,7 +122,7 @@ export default function AddMeal() {
                 helperText={formik.touched.amount && formik.errors.amount}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">gm</InputAdornment>
+                    <InputAdornment position="end">units/grams</InputAdornment>
                   ),
                 }}
               />

@@ -44,14 +44,13 @@ export default function AddFood() {
   // console.log(data?.names);
 
   const formSubmitted = async (event) => {
-    
     const update = await updateFoodData(event);
-    console.log(update);
   };
 
   const formik = useFormik({
     initialValues: {
       category: "",
+      measure: "",
       name: "",
       calories: 0,
       carbs: 0,
@@ -103,6 +102,28 @@ export default function AddFood() {
                 <MenuItem key="snack" value="snack">
                   snack
                 </MenuItem>
+                <MenuItem key="other" value="other">
+                  other
+                </MenuItem>
+              </TextField>
+
+              <TextField
+                className={clsx(classes.margin, classes.textField)}
+                label="measure"
+                id="measure"
+                name="measure"
+                select
+                value={formik.values.measure}
+                onChange={formik.handleChange}
+                error={formik.touched.measure && Boolean(formik.errors.measure)}
+                helperText={formik.touched.measure && formik.errors.measure}
+              >
+                <MenuItem key="per 100gm" value="per 100gm">
+                  per 100gm
+                </MenuItem>
+                <MenuItem key="per unit" value="per unit">
+                  per unit
+                </MenuItem>
               </TextField>
               <TextField
                 className={clsx(classes.margin, classes.textField)}
@@ -129,7 +150,9 @@ export default function AddFood() {
                 helperText={formik.touched.calories && formik.errors.calories}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">/100 gm</InputAdornment>
+                    <InputAdornment position="end">
+                      {formik.values.measure}
+                    </InputAdornment>
                   ),
                 }}
               />
@@ -144,7 +167,9 @@ export default function AddFood() {
                 helperText={formik.touched.carbs && formik.errors.carbs}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">/100 gm</InputAdornment>
+                    <InputAdornment position="end">
+                      {formik.values.measure}
+                    </InputAdornment>
                   ),
                 }}
               />
@@ -159,7 +184,9 @@ export default function AddFood() {
                 helperText={formik.touched.fat && formik.errors.fat}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">/100 gm</InputAdornment>
+                    <InputAdornment position="end">
+                      {formik.values.measure}
+                    </InputAdornment>
                   ),
                 }}
               />
@@ -174,7 +201,9 @@ export default function AddFood() {
                 helperText={formik.touched.fiber && formik.errors.fiber}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">/100 gm</InputAdornment>
+                    <InputAdornment position="end">
+                      {formik.values.measure}
+                    </InputAdornment>
                   ),
                 }}
               />
@@ -189,7 +218,9 @@ export default function AddFood() {
                 helperText={formik.touched.protein && formik.errors.protein}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">/100 gm</InputAdornment>
+                    <InputAdornment position="end">
+                      {formik.values.measure}
+                    </InputAdornment>
                   ),
                 }}
               />
