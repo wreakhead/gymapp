@@ -36,14 +36,14 @@ const DietLayout = () => {
               <DietDash />
             </div>
           </Grid>
-          <Grid item xs={5} sm={5}>
+          {/* <Grid item xs={5} sm={5}>
             <div className="dietDiv">
               <Macros />
             </div>
           </Grid>
           <Grid item xs={7} sm={7}>
             <div className="dietDiv">suggestion</div>
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
             <AddMeal />
           </Grid>

@@ -12,8 +12,9 @@ import IconButton from "@material-ui/core/IconButton";
 import { delWorkoutData, getWorkoutData } from "@auth/auth";
 import useSWR from "swr";
 import { useState } from "react";
+import { format } from "timeago.js";
 
-const SmallTable = (filter) => {
+const LastWeekTable = (filter) => {
   const filterData = useState(null);
 
   const { data } = useSWR("getworkoutdata", getWorkoutData, {
@@ -31,51 +32,51 @@ const SmallTable = (filter) => {
 
   return (
     <>
+      <h4>Last week same day</h4>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Day</TableCell>
               <TableCell align="right">Workout</TableCell>
-              <TableCell align="right">type</TableCell>
+
               <TableCell align="right">sets</TableCell>
               <TableCell align="right">reps</TableCell>
               <TableCell align="right">weight</TableCell>
-              <TableCell align="right">AMQRP</TableCell>
-              <TableCell align="right">AMQRP wt</TableCell>
-              <TableCell align="right">remark</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.workout.map((workout) => (
-              <TableRow key={workout._id}>
-                <TableCell component="th" scope="row">
-                  <h3>{convertDate(workout.date)}</h3>
-                </TableCell>
-                <TableCell align="right">{workout.name}</TableCell>
-                <TableCell align="right">{workout.type}</TableCell>
-                <TableCell align="right">{workout.sets}</TableCell>
-                <TableCell align="right">{workout.reps}</TableCell>
-                <TableCell align="right">{workout.weight}</TableCell>
-                <TableCell align="right">{workout.AMQRP}</TableCell>
-                <TableCell align="right">{workout.AMQRPwt}</TableCell>
-                <TableCell align="right">{workout.remark}</TableCell>
-                <TableCell align="right">
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => {
-                      deleteData({ _id: workout._id });
-                    }}
-                  >
-                    <DeleteOutlineRoundedIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+            {data?.workout.map((workout) => {
+              if (format(workout.date) === "6 days ago") {
+                return (
+                  <TableRow key={workout._id}>
+                    <TableCell component="th" scope="row">
+                      <h3>{convertDate(workout.date)}</h3>
+                    </TableCell>
+                    <TableCell align="right">{workout.name}</TableCell>
+
+                    <TableCell align="right">{workout.sets}</TableCell>
+                    <TableCell align="right">{workout.reps}</TableCell>
+                    <TableCell align="right">{workout.weight}</TableCell>
+
+                    <TableCell align="right">
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          deleteData({ _id: workout._id });
+                        }}
+                      >
+                        <DeleteOutlineRoundedIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              }
+            })}
           </TableBody>
         </Table>
       </TableContainer>
     </>
   );
 };
-export default SmallTable;
+export default LastWeekTable;

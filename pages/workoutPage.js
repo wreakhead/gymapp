@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { checkLoggedIn } from "@auth/auth";
 import { Box, Container } from "@material-ui/core";
+import LastWeekTable from "@components/HomeLayout/LastWeekTable";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,30 +32,29 @@ const workoutPage = () => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-      <Container maxWidth="lg">
-        <Box component="div" p={1} className="dashLayout">
-          {checkLoggedIn() ? (
-            <Grid container className={classes.root} spacing={1}>
-              {/* <Grid item xs={12}>
-                <Paper variant="outlined" className={classes.paper}>
-                  <FilterWorkout />
-                </Paper>
-              </Grid> */}
-              <Grid item xs={12}>
-                <Paper variant="outlined" className={classes.paper}>
-                  <AddWorkout />
-                </Paper>
-              </Grid>
 
-              <Grid item xs={12}>
-                <SmallTable />
-              </Grid>
+      <Box component="div" className="dashLayout">
+        {checkLoggedIn() ? (
+          <Grid container className={classes.root} spacing={1}>
+            <Grid item xs={12}>
+              <Paper variant="outlined" className={classes.paper}>
+                <LastWeekTable />
+              </Paper>
             </Grid>
-          ) : (
-            <></>
-          )}
-        </Box>
-      </Container>
+            <Grid item xs={12}>
+              <Paper variant="outlined" className={classes.paper}>
+                <AddWorkout />
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <SmallTable />
+            </Grid>
+          </Grid>
+        ) : (
+          <></>
+        )}
+      </Box>
     </>
   );
 };
