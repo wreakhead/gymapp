@@ -53,8 +53,8 @@ export default function AddMeal() {
   });
 
   return (
-    <div className="">
-      <Accordion>
+    <div>
+      <Accordion className="Color2">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -62,7 +62,7 @@ export default function AddMeal() {
         >
           <h2>Add Your Meals</h2>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className="Color1">
           <div className={classes.root}>
             <form onSubmit={formik.handleSubmit}>
               <TextField

@@ -20,16 +20,20 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     color: "#fff",
   },
+  addMoreFood: {
+    display: "flex",
+    justifyContent: "center",
+    top: "50%",
+  },
 }));
 
 export default function DietDash() {
   const classes = useStyles();
   const { data } = useSWR("intakeMacros", getIntake, { refreshInterval: 1000 });
-  
 
   const checkData = () => {
-    if (data) return true;
-    else return false;
+    if (data?.totalCalories === 0) return false;
+    else return true;
   };
   return (
     <div className={classes.root}>
@@ -40,7 +44,7 @@ export default function DietDash() {
               data={{
                 datasets: [
                   {
-                    label: "My First Dataset",
+                    label: "Diet data",
                     data: [
                       data?.totalProtein,
                       data?.totalCarbs,
@@ -48,8 +52,8 @@ export default function DietDash() {
                     ],
                     backgroundColor: [
                       "rgb(255, 99, 132)",
-                      "rgb(54, 162, 235)",
-                      "rgb(255, 205, 86)",
+                      "#00bcd4",
+                      "#ffc107",
                     ],
 
                     hoverOffset: 3,
@@ -63,16 +67,41 @@ export default function DietDash() {
               }}
             />
           ) : (
-            <></>
+            <Doughnut
+              data={{
+                datasets: [
+                  {
+                    label: "no data",
+                    data: [100],
+                    backgroundColor: ["#90a4ae"],
+
+                    hoverOffset: 3,
+                  },
+                ],
+              }}
+              height={200}
+              width={200}
+              options={{
+                maintainAspectRatio: false,
+              }}
+            />
           )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <div className={classes.paper}>
             <h1>Diet Intake</h1>
-            <h3>Calories: {data ? <>{data.totalCalories}</> : <>0</>}</h3>
-            <h3>Fats (Yellow): {data ? <>{data.totalFat}</> : <>0</>}</h3>
-            <h3>Carbs (Blue): {data ? <>{data.totalCarbs}</> : <>0</>}</h3>
-            <h3>Protein (Red): {data ? <>{data.totalProtein}</> : <>0</>}</h3>
+            <h3 className="Color3">
+              Calories: {data ? <>{data.totalCalories}</> : <>0</>}
+            </h3>
+            <h3 className="Color3" style={{ color: "#ffc107" }}>
+              Fats: {data ? <>{data.totalFat}</> : <>0</>}
+            </h3>
+            <h3 className="Color3" style={{ color: "#00bcd4" }}>
+              Carbs: {data ? <>{data.totalCarbs}</> : <>0</>}
+            </h3>
+            <h3 className="Color3" style={{ color: "rgb(255, 99, 132)" }}>
+              Protein: {data ? <>{data.totalProtein}</> : <>0</>}
+            </h3>
           </div>
         </Grid>
       </Grid>

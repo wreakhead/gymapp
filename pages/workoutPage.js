@@ -12,12 +12,18 @@ import LastWeekTable from "@components/HomeLayout/LastWeekTable";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    padding: "20px",
+    display: "flex",
+    justifyContent: "center",
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+  },
+  bargraph: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    backgroundColor: "#eceff1",
   },
 }));
 
@@ -33,28 +39,25 @@ const workoutPage = () => {
         />
       </Head>
 
-      <Box component="div" className="dashLayout">
+      <div className={classes.root}>
         {checkLoggedIn() ? (
           <Grid container className={classes.root} spacing={1}>
-            <Grid item xs={12}>
-              <Paper variant="outlined" className={classes.paper}>
-                <LastWeekTable />
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper variant="outlined" className={classes.paper}>
+            <Grid item xs={12} md={8}>
+              <div className="dietDiv">
                 <AddWorkout />
-              </Paper>
+              </div>
             </Grid>
-
-            <Grid item xs={12}>
+            <Grid item xs={12} md={8}>
               <SmallTable />
+            </Grid>
+            <Grid item xs={12} md={8}>
+              <LastWeekTable />
             </Grid>
           </Grid>
         ) : (
           <></>
         )}
-      </Box>
+      </div>
     </>
   );
 };

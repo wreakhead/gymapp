@@ -32,7 +32,7 @@ export default function FoodBank(props) {
   };
 
   return (
-    <Accordion>
+    <Accordion className="Color2">
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
@@ -40,8 +40,8 @@ export default function FoodBank(props) {
       >
         <h2>{props.type.charAt(0).toUpperCase() + props.type.slice(1)}</h2>
       </AccordionSummary>
-      <AccordionDetails>
-        <TableContainer component={Paper}>
+      <AccordionDetails className="Color1">
+        <TableContainer component={Paper} className="Color1">
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>

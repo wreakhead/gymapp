@@ -31,7 +31,8 @@ const SmallTable = (filter) => {
 
   return (
     <>
-      <TableContainer component={Paper}>
+    <h3>Today's Workout</h3>
+      <TableContainer component={Paper} className="Color1">
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -47,31 +48,35 @@ const SmallTable = (filter) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.workout.map((workout) => (
-              <TableRow key={workout._id}>
-                <TableCell component="th" scope="row">
-                  <h3>{convertDate(workout.date)}</h3>
-                </TableCell>
-                <TableCell align="right">{workout.name}</TableCell>
-                <TableCell align="right">{workout.type}</TableCell>
-                <TableCell align="right">{workout.sets}</TableCell>
-                <TableCell align="right">{workout.reps}</TableCell>
-                <TableCell align="right">{workout.weight}</TableCell>
-                <TableCell align="right">{workout.AMQRP}</TableCell>
-                <TableCell align="right">{workout.AMQRPwt}</TableCell>
-                <TableCell align="right">{workout.remark}</TableCell>
-                <TableCell align="right">
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => {
-                      deleteData({ _id: workout._id });
-                    }}
-                  >
-                    <DeleteOutlineRoundedIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
+            {data?.workout.map((workout) => {
+              if (new Date().getDate() === new Date(workout.date).getDate()){
+                return (
+                  <TableRow key={workout._id}>
+                    <TableCell component="th" scope="row">
+                      <h3>{convertDate(workout.date)}</h3>
+                    </TableCell>
+                    <TableCell align="right">{workout.name}</TableCell>
+                    <TableCell align="right">{workout.type}</TableCell>
+                    <TableCell align="right">{workout.sets}</TableCell>
+                    <TableCell align="right">{workout.reps}</TableCell>
+                    <TableCell align="right">{workout.weight}</TableCell>
+                    <TableCell align="right">{workout.AMQRP}</TableCell>
+                    <TableCell align="right">{workout.AMQRPwt}</TableCell>
+                    <TableCell align="right">{workout.remark}</TableCell>
+                    <TableCell align="right">
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => {
+                          deleteData({ _id: workout._id });
+                        }}
+                      >
+                        <DeleteOutlineRoundedIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              }
+            })}
           </TableBody>
         </Table>
       </TableContainer>

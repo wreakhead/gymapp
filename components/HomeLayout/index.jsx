@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Dashboard from "./Dasboard";
-import TotalTime from "./TotalTime";
+
 import Pushgraph from "./Pushgraph";
 import Pullgraph from "./Pullgraph";
 import Leggraph from "./Leggraph";
