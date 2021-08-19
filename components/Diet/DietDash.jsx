@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { Doughnut } from "react-chartjs-2";
 import useSWR from "swr";
@@ -32,7 +31,13 @@ export default function DietDash() {
   const { data } = useSWR("intakeMacros", getIntake, { refreshInterval: 1000 });
 
   const checkData = () => {
-    if (data?.totalCalories === 0) return false;
+    if (
+      data?.totalCalories === 0 ||
+      (data?.totalProtein === 0 &&
+        data?.totalCarbs === 0 &&
+        data?.totalFat === 0)
+    )
+      return false;
     else return true;
   };
   return (

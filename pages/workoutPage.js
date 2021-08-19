@@ -3,10 +3,10 @@ import AddWorkout from "@components/HomeLayout/AddWorkout";
 import FilterWorkout from "@components/FilterWorkout";
 import Head from "next/head";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
+
 import Grid from "@material-ui/core/Grid";
 import { checkLoggedIn } from "@auth/auth";
-import { Box, Container } from "@material-ui/core";
+
 import LastWeekTable from "@components/HomeLayout/LastWeekTable";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: "flex",
     justifyContent: "center",
+    marginBottom: "120px",
+    padding: "10px",
   },
   paper: {
     padding: theme.spacing(2),
@@ -39,25 +41,23 @@ const workoutPage = () => {
         />
       </Head>
 
-      <div className={classes.root}>
-        {checkLoggedIn() ? (
-          <Grid container className={classes.root} spacing={1}>
-            <Grid item xs={12} md={8}>
-              <div className="dietDiv">
-                <AddWorkout />
-              </div>
-            </Grid>
-            <Grid item xs={12} md={8}>
-              <SmallTable />
-            </Grid>
-            <Grid item xs={12} md={8}>
-              <LastWeekTable />
-            </Grid>
+      {checkLoggedIn() ? (
+        <Grid container className={classes.root} spacing={1}>
+          <Grid item xs={12} md={8}>
+            <div className="dietDiv">
+              <AddWorkout />
+            </div>
           </Grid>
-        ) : (
-          <></>
-        )}
-      </div>
+          <Grid item xs={12} md={8}>
+            <SmallTable />
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <LastWeekTable />
+          </Grid>
+        </Grid>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
