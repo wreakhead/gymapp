@@ -40,7 +40,7 @@ It's a gym-app "no surprise there :)", which tracks your daily diet, workout rou
 - ![2021-08-10 (11)](https://user-images.githubusercontent.com/43853848/128889734-3c6ec72c-d969-4e7d-a568-49db68471be6.png)
 
 - SignIn/SignUp:
-- ![2021-08-10 (1)](https://user-images.githubusercontent.com/43853848/128890081-0072c26d-ab34-47c5-8ec7-4766414158d2.png)![2021-08-10 (12)](https://user-images.githubusercontent.com/43853848/128890147-5733b43c-5881-4b11-90c5-31c9895d0d20.png)
+- ![2021-08-10 (12)](https://user-images.githubusercontent.com/43853848/128890147-5733b43c-5881-4b11-90c5-31c9895d0d20.png)
 
 
 ## Learn More
